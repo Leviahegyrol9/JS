@@ -1,4 +1,4 @@
-const number = 47;
+const number = 10;
 
 var oszthato = false;
 

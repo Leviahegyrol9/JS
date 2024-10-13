@@ -11,4 +11,4 @@ for (i = also; i <= felso; i++)
     }
 }
 
-console.log(`A(z) [${also}; ${felso}] intervallumba eso paros szamok osszege: ${osszeg}`)
+console.log(`A(z) [${also}; ${felso}] intervallumba eső páros számok összege: ${osszeg}`)
