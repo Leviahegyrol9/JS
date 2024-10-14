@@ -1,6 +1,6 @@
-var num1 = 10;
-var num2 = 2;
-let operation = "+";
+const num1 = 10;
+const num2 = 2;
+var operation = "+";
 var result = null;
 
 console.log(`Első szám: ${num1}\nMásodik szám: ${num2}\nMűvelet: ${operation}\n`)

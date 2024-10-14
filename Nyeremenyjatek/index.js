@@ -1,4 +1,4 @@
-const number = 10;
+const number = 3;
 
 var oszthato = false;
 
@@ -18,5 +18,3 @@ if (oszthato)
 else{
     console.log("Nyertél!")
 }
-
-// szamologép hazi

@@ -1,14 +1,12 @@
-const also = 42;
-const felso = 100;
+const start = 42;
+const end = 100;
 
-var osszeg = 0;
+var sum = 0;
 
-for (i = also; i <= felso; i++)
-{
-    if (i % 2 === 0)
-    {
-        osszeg += i;
+for (i = start; i <= end; i++){
+    if (i % 2 === 0){
+        sum += i;
     }
 }
 
-console.log(`A(z) [${also}; ${felso}] intervallumba eső páros számok összege: ${osszeg}`)
+console.log(`A(z) [${start}; ${end}] intervallumba eso paros szamok osszege: ${sum}`)
