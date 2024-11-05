@@ -1,12 +1,14 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <title>Calculator</title>
 </head>
+
 <body>
-    <input type="number" id="elso">
+    <input type="number" id="elso" placeholder="Első szám">
 
     <select id="muvelet">
         <option value="+">+</option>
@@ -15,35 +17,40 @@
         <option value="/">/</option>
     </select>
 
-    <input type="number" id="masodik">
+    <input type="number" id="masodik" placeholder="Második szám">
     <button id="kuld">Klikk</button>
 
     <script>
-        const elso = document.getElementById("elso")
-        const masodik = document.getElementById("masodik")
-        const muvelet = document.getElementById("muvelet")
+        const elso = document.getElementById("elso");
+        const masodik = document.getElementById("masodik");
+        const muvelet = document.getElementById("muvelet");
+        const kuld = document.getElementById("kuld");
 
         kuld.addEventListener("click", () => {
-                switch (muvelet)
-            {
+            const elsoSzam = parseInt(elso.value);
+            const masodikSzam = parseInt(masodik.value);
+
+            var result;
+
+            switch (muvelet.value) {
                 case "+":
-                    var result = elso + masodik;
+                    result = elsoSzam + masodikSzam;
                     break;
                 case "-":
-                    var result = elso - masodik;
+                    result = elsoSzam - masodikSzam;
                     break;
                 case "*":
-                    var result = elso * masodik;
+                    result = elsoSzam * masodikSzam;
                     break;
                 case "/":
-                    var result = elso / masodik;
+                    result = elsoSzam / masodikSzam;
                     break;
             }
 
-        document.write(result)
 
-        })
-
+            alert(`${elsoSzam} ${muvelet.value} ${masodikSzam} = ${result}`);
+        });
     </script>
 </body>
+
 </html>
