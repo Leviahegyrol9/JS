@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <input type="number" id="elso">
+
+    <select id="muvelet">
+        <option value="+">+</option>
+        <option value="-">-</option>
+        <option value="*">*</option>
+        <option value="/">/</option>
+    </select>
+
+    <input type="number" id="masodik">
+    <button id="kuld">Klikk</button>
+
+    <script>
+        const elso = document.getElementById("elso")
+        const masodik = document.getElementById("masodik")
+        const muvelet = document.getElementById("muvelet")
+
+        kuld.addEventListener("click", () => {
+                switch (muvelet)
+            {
+                case "+":
+                    var result = elso + masodik;
+                    break;
+                case "-":
+                    var result = elso - masodik;
+                    break;
+                case "*":
+                    var result = elso * masodik;
+                    break;
+                case "/":
+                    var result = elso / masodik;
+                    break;
+            }
+
+        document.write(result)
+
+        })
+
+    </script>
+</body>
+</html>

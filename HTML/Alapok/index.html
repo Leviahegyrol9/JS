@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <!--
+    body
+    -->
+    <input id="elso" type="text" value="November">
+    <button id="gomb" type="submit">Elküld</button>
+    <br>
+    <div id="tartalom"></div>
+    <select id="lista">
+        <option value="Elso">Elso</option>
+        <option value="Masodik">Masodik</option>
+    </select>
+    <script>
+        //comment
+
+        /*
+        több soros
+        komment
+        */
+
+        const elso = document.getElementById("elso")
+        const gomb = document.getElementById("gomb")
+        const tartalom = document.getElementById("tartalom")
+        const lista = document.getElementById("lista")
+
+        gomb.addEventListener("click", () => {
+            tartalom.innerHTML = `Gombnyomas történt: ${elso.value}`
+            alert(lista.value)
+        })
+        document.write()
+    </script>
+</body>
+</html>
