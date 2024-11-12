@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <style>
+        .center {
+            text-align: center;
+        }
+    </style>
+
+    <div class="center">
+        <h1>Hőmérséklet átváltó</h1>
+        <p>Adja meg a celsius hőmérsékletet:</p>
+        <input type="number" id="deg">
+        <button id="button">Számítás</button>
+        <br>
+        <br>
+        <span id="f"> </span>
+        <br>
+        <span id="k"></span>
+    </div>
+
+    <script>
+        const deg = document.getElementById("deg");
+        const button = document.getElementById("button");
+
+        button.addEventListener("click", () => {
+            var kelvin = parseInt(deg.value) + 273.15
+            var farenheit = parseInt(deg.value) * 1.8 + 32
+
+            document.getElementById("f").innerHTML = (`<span>${deg.value} &deg;C</span> = <span><b>${farenheit}</b> &deg;F</span>`);
+            document.getElementById("k").innerHTML = `<span>${deg.value} &deg;C</span> = <b>${kelvin}</b> K`;
+
+        });
+    </script>
+</body>
+
+</html>
