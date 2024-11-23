@@ -6,6 +6,75 @@
     <title>Pénzváltó</title>
 </head>
 <body>
-    
+    <style>
+        body{
+            text-align: center;
+        }
+        #currency{
+            width: 170px;
+            height: 20px;
+        }
+        button {
+            width: 150px;
+            border-radius: 5px;
+            outline: 5px solid blue;
+            border: 1px solid blue;
+        }
+
+        button:hover {
+            background-color: blue;
+            color: white;
+        }
+    </style>
+
+    <h1>Pénzváltó</h1>
+    <p>Összeg forintban</p>
+    <input type="number" id="huf">
+    <p>Mibe szeretné átváltani?</p>
+    <select id="currency">
+        <option value="usd">Dollár</option>
+        <option value="eur">Euró</option>
+    </select>
+    <br>
+    <br>
+    <button id="button">Átvált</button>
+    <br>
+    <br>
+    <span id="result"></span>
+    <script>
+        const huf = document.getElementById("huf");
+      
+        const currency = document.getElementById("currency");
+        
+        const button = document.getElementById("button");
+        
+        const result = document.getElementById("result");
+        
+        const eur = 411.62;
+
+        const usd = 395;
+        
+        button.addEventListener("click", () =>{
+            if (huf.value == ""){
+                result.innerHTML = ("Töltsd ki a mezőt!");
+            }
+            else{
+                switch(currency.value){
+                    case "usd":
+                        var convert = huf.value / usd;
+                        break;
+
+                    case "eur":
+                        var convert = huf.value / eur;
+                        break;
+                }
+
+                result.innerHTML = (`${huf.value} Ft = ${convert.toFixed(2)} ${currency.value.toUpperCase()}`);
+            }
+
+        })
+
+
+    </script>
 </body>
 </html>
