@@ -12,10 +12,17 @@
         body {
             text-align: center;
         }
-        button{
+
+        button {
             width: 150px;
             border-radius: 5px;
             outline: 5px solid blue;
+            border: 1px solid blue;
+        }
+
+        button:hover {
+            background-color: blue;
+            color: white;
         }
     </style>
 
@@ -41,36 +48,41 @@
         const button = document.getElementById("button");
 
         button.addEventListener("click", () => {
-            var bmi = parseFloat(weight.value) / Math.pow(parseFloat(height.value)/100, 2);
+            if (weight.value == "" || height.value == "") {
+                document.getElementById("bmi").innerHTML = ("Töltsd ki a mezőket!");
+                return;
+            }
 
-           
-                if (bmi >= 40){
-                    var text = "Súlyosan elhízott (III. fokú)";
-                }
-                else if (bmi >= 35 && bmi <= 39.9){
-                    var text = "Elhízott (II. fokú)";
-                }
-                else if (bmi >= 30 && bmi <= 34.9){
-                    var text = "Elhízott (I. fokú)";
-                }
-                else if (bmi >= 25 && bmi <= 29.9){
-                    var text = "Túlsúlyos";
-                }
-                else if (bmi >= 18.5 && bmi <= 24.9){
-                    var text = "Normál testsúly";
-                }
-                else if (bmi >= 17 && bmi <= 18.4){
-                    var text = "Enyhe soványság";
-                }
-                else if (bmi >= 16 && bmi <= 16.9){
-                    var text = "Mérsékelt soványság";
-                }
-                else{
-                    var text = "Súlyos soványság";
-                }
-            
+            var bmi = parseFloat(weight.value) / Math.pow(parseFloat(height.value) / 100, 2);
 
-            document.getElementById("bmi").innerHTML = (`${text}: ${bmi.toFixed(2)}`);
+
+            if (bmi >= 40) {
+                var text = "Súlyosan elhízott (III. fokú)";
+            }
+            else if (bmi >= 35 && bmi <= 39.9) {
+                var text = "Elhízott (II. fokú)";
+            }
+            else if (bmi >= 30 && bmi <= 34.9) {
+                var text = "Elhízott (I. fokú)";
+            }
+            else if (bmi >= 25 && bmi <= 29.9) {
+                var text = "Túlsúlyos";
+            }
+            else if (bmi >= 18.5 && bmi <= 24.9) {
+                var text = "Normál testsúly";
+            }
+            else if (bmi >= 17 && bmi <= 18.4) {
+                var text = "Enyhe soványság";
+            }
+            else if (bmi >= 16 && bmi <= 16.9) {
+                var text = "Mérsékelt soványság";
+            }
+            else {
+                var text = "Súlyos soványság";
+            }
+
+
+            document.getElementById("bmi").innerHTML = (`Az állapotod: ${text}: <br>BMI: (${bmi.toFixed(1)})`);
 
         });
     </script>
