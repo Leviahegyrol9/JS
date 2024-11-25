@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="hu">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Római Szám Konverter</title>
+</head>
+<body>
+    <h1>Római Szám Konverter</h1>
+    <label for="conversion-type">Válassz átalakítást:</label>
+    <select id="conversion-type">
+        <option value="toRoman">Arab -> Római</option>
+        <option value="toArabic">Római -> Arab</option>
+    </select>
+    <br>
+    <br>
+
+    <label for="input-value">Adja meg az értéket:</label>
+    <input type="text" id="input-value">
+    <br>
+    <br>
+
+    <button id="button">Átalakítás</button>
+    <p id="output"></p>
+
+    <script>
+        const button = document.getElementById("button");
+
+        button.addEventListener("click", () =>{           
+            const conversionType = document.getElementById("conversion-type").value;
+            const inputValue = document.getElementById("input-value").value;
+            const output = document.getElementById("output");
+
+            if (conversionType === "toRoman") {
+                const num = parseInt(inputValue);
+                if (isNaN(num)) {
+                    output.textContent = "Hiba: Kérjük, adjon meg egy számot!";
+                } else {
+                    output.textContent = toRoman(num);
+                }
+            } else if (conversionType === "toArabic") {
+                output.textContent = toArabic(inputValue.toUpperCase());
+            }
+        })
+
+        function toRoman(num) {
+            if (num < 1 || num > 2000) {
+                return "Hiba: Az arab számnak 1 és 2000 között kell lennie.";
+            }
+
+            let result = "";
+            const romanNumbers = [
+                [1000, "M"], [900, "CM"], [500, "D"], [400, "CD"],
+                [100, "C"], [90, "XC"], [50, "L"], [40, "XL"],
+                [10, "X"], [9, "IX"], [5, "V"], [4, "IV"], [1, "I"]
+            ];
+
+            for (let i = 0; i < romanNumbers.length; i++) {
+                while (num >= romanNumbers[i][0]) {
+                    result += romanNumbers[i][1];
+                    num -= romanNumbers[i][0];
+                }
+            }
+            return result;
+        }
+
+        function toArabic(roman) {
+            const romanToValue = { I: 1, V: 5, X: 10, L: 50, C: 100, D: 500, M: 1000 };
+            let total = 0;
+            let prevValue = 0;
+
+            for (let i = roman.length - 1; i >= 0; i--) {
+                let current = romanToValue[roman[i]];
+                if (!current) {
+                    return "Hiba: Érvénytelen római szám.";
+                }
+                if (current < prevValue) {
+                    total -= current;
+                } else {
+                    total += current;
+                }
+                prevValue = current;
+            }
+
+            if (total < 1 || total > 2000) {
+                return "Hiba: Az arab szám 1 és 2000 között kell legyen.";
+            }
+            return total;
+        }
+
+    </script>
+</body>
+</html>
