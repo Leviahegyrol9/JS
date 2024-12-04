@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <style>
+
+    </style>
+
+<div class="text">1</div>
+<div class="text">1</div>
+
+<button>Name</button>
+
+<script>
+    const text = document.querySelectorAll(".text");
+    
+    const button = document.querySelector("button");
+
+    button.addEventListener("click", () =>{
+
+    text.forEach((text) => {
+        text.style.color = "red";
+});
+    })
+
+    button.addEventListener("mouseout", () =>{
+        text.forEach((text) => {
+            text.style.color = "black";
+});
+        
+})
+</script>
+</body>
+</html>
