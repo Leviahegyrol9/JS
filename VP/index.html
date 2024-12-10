@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="hu">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Óracsere figyelő</title>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.18.5/xlsx.full.min.js"></script>
+</head>
+<body>
+    <h1>Óracsere figyelő</h1>
+    <button id="checkButton">Holnapi óracsere ellenőrzése</button>
+    <pre id="result"></pre>
+
+    <script>
+        document.getElementById('checkButton').addEventListener('click', async () => {
+            const today = new Date();
+            const tomorrow = new Date();
+            tomorrow.setDate(today.getDate() + 1);
+            const day = tomorrow.getDate();
+            const month = tomorrow.getMonth() + 1; // hónap indexelése 0-tól indul
+
+            // Link kialakítása (példa: feltételezzük, hogy a napokhoz egyedi URL tartozik)
+            const url = `https://vasvari.hu/p/oracserek`; // Ide egy dinamikus URL kéne, ha a link változik.
+
+            try {
+                const response = await fetch(url);
+                const text = await response.text();
+                const parser = new DOMParser();
+                const doc = parser.parseFromString(text, 'text/html');
+
+                // Keressük meg a linket a holnapi naphoz (feltételezve, hogy van ilyen struktúra)
+                const link = Array.from(doc.querySelectorAll('a')).find(a => a.textContent.includes(`${month}.${day}`));
+
+                if (!link) {
+                    document.getElementById('result').textContent = 'Nem található link a holnapi naphoz.';
+                    return;
+                }
+
+                // Excel letöltése
+                const excelUrl = link.href;
+                const excelResponse = await fetch(excelUrl);
+                const excelData = await excelResponse.arrayBuffer();
+
+                const workbook = XLSX.read(excelData, { type: 'array' });
+                const sheetName = workbook.SheetNames[0];
+                const worksheet = workbook.Sheets[sheetName];
+                const jsonData = XLSX.utils.sheet_to_json(worksheet);
+
+                // Keresés a "11.b_kezdo" szóra
+                const results = jsonData.filter(row => Object.values(row).some(value => String(value).includes('11.b_kezdo')));
+
+                if (results.length > 0) {
+                    document.getElementById('result').textContent = JSON.stringify(results, null, 2);
+                } else {
+                    document.getElementById('result').textContent = 'Nincs találat a "11.b_kezdo" kulcsszóra.';
+                }
+
+            } catch (error) {
+                console.error(error);
+                document.getElementById('result').textContent = 'Hiba történt az adatok feldolgozása során.';
+            }
+        });
+    </script>
+</body>
+</html>
