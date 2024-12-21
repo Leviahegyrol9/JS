@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="hu">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Szorzótábla</title>
+</head>
+<body>
+    <style>
+        body{
+            margin-top: 25px;
+        }
+        div{
+            text-align: center;
+            margin: 0 auto;
+            width: 50vw;
+            border: 3px solid black;
+            border-radius: 10px;
+            padding: 20px;
+        }
+        span{
+            font-size: 35px;
+        }
+        label{
+            font-size: 25px;
+        }
+        input{
+            border: 2px solid black;
+            border-radius: 5px;
+        }
+        input:focus{
+            outline: 3px solid gray;
+        }
+        #rating{
+            font-size: 25px;
+            font-weight: bold;
+        }
+        button{
+            background-color: white;
+            color: black;
+            outline: 3px solid black;
+            width: 120px;
+            height: 30px;
+            border: none;
+            border-radius: 10px;
+        }
+        button:hover{
+            background-color: black;
+            color: white;
+        }
+    </style>
+    
+    <div>
+    <span id="first"></span>
+    <span>&nbsp;*&nbsp;</span>
+    <span id="second"></span>
+    <br>
+    <br>
+    <button onclick="location.reload();">Szám generálása</button>
+    <br>
+    <br>
+    <label for="answer">Válasz:</label>
+    <input type="number" id="answer">
+    <br>
+    <br>
+    <button id="check">Ellenőrzés</button>
+    <br>
+    <br>
+    <span id="rating"></span>
+    </div>
+
+    <script>
+        const first = document.getElementById("first");
+        const second = document.getElementById("second");
+        const answer = document.getElementById("answer");
+        const rating = document.getElementById("rating");
+        const button = document.getElementById("check");
+
+        const firstNum = Math.floor(Math.random() * 10);
+
+        const secondNum = Math.floor(Math.random() * 10);
+
+        const result = firstNum * secondNum;
+
+        first.innerHTML = firstNum;
+        second.innerHTML = secondNum;
+
+        console.log(answer.value)
+
+        button.addEventListener("click", () => {
+            if(answer.value == ""){
+                rating.style.color = "red";
+                rating.innerHTML = ("Adja meg a választ!");
+            }
+            else{
+                if(answer.value == result){
+                    rating.style.color = "green";
+                    rating.innerHTML = ("A válasz helyes!");
+                }
+                else{
+                    rating.style.color = "red";
+                    rating.innerHTML = (`A válasz helytelen!<br>A megoldás: ${result}`);
+                }
+            }
+
+        })
+
+
+    </script>
+</body>
+</html>
