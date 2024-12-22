@@ -1,91 +1,74 @@
 <!DOCTYPE html>
 <html lang="en">
-
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
-</head>
-
-<body>
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>BMI-kalkulátor</title>
+  </head>
+  <body>
     <style>
-        body {
-            text-align: center;
-        }
-
-        button {
-            width: 150px;
-            border-radius: 5px;
-            outline: 5px solid blue;
-            border: 1px solid blue;
-        }
-
-        button:hover {
-            background-color: blue;
-            color: white;
-        }
+      body {
+        text-align: center;
+      }
+      input {
+        width: 50px;
+      }
+      button {
+        border-radius: 5px;
+      }
+      button:hover {
+        color: white;
+        background-color: black;
+      }
     </style>
-
-    <div>
-        <h1>BMI calculator</h1>
-        <p>Adja meg a testsúlyát(kg):</p>
-        <input type="number" id="weight">
-        <p>Adja meg a magasságát(cm):</p>
-        <input type="number" id="height">
-        <br>
-        <br>
-        <button id="button">Számítás</button>
-        <br>
-        <br>
-        <span id="bmi"> </span>
-        <br>
-    </div>
+    <h1>BMI-kalkulátor</h1>
+    Magasság (cm):
+    <input type="number" id="height" />
+    <br /><br />
+    Testsúly (kg):
+    <input type="number" id="weight" />
+    <br /><br />
+    <button id="button">Számítás</button>
+    <br /><br />
+    <span id="text"></span>
 
     <script>
-        const weight = document.getElementById("weight");
-        const height = document.getElementById("height");
+      const height = document.getElementById("height");
+      const weight = document.getElementById("weight");
+      const button = document.getElementById("button");
+      const text = document.getElementById("text");
+      var bmi;
+      var result;
 
-        const button = document.getElementById("button");
+      button.addEventListener("click", () => {
+        if (height.value == "" || weight.value == "") {
+          alert("Töltse ki a mezőket!");
+        } else {
+          bmi = weight.value / Math.pow(height.value / 100, 2);
 
-        button.addEventListener("click", () => {
-            if (weight.value == "" || height.value == "") {
-                document.getElementById("bmi").innerHTML = ("Töltsd ki a mezőket!");
-                return;
-            }
+          if (bmi >= 40) {
+            result = "Súlyosan elhízott (III. fokú)";
+          } else if (bmi >= 35 && bmi <= 39.9) {
+            result = "Elhízott (II. fokú)";
+          } else if (bmi >= 30 && bmi <= 34.9) {
+            result = "Elhízott (I. fokú)";
+          } else if (bmi >= 25 && bmi <= 29.9) {
+            result = "Túlsúlyos";
+          } else if (bmi >= 18.5 && bmi <= 24.9) {
+            result = "Normál testsúly";
+          } else if (bmi >= 17 && bmi <= 18.4) {
+            result = "Enyhe soványság";
+          } else if (bmi >= 16 && bmi <= 16.9) {
+            result = "Mérsékelt soványság";
+          } else {
+            result = "Súlyos soványság";
+          }
 
-            var bmi = parseFloat(weight.value) / Math.pow(parseFloat(height.value) / 100, 2);
-
-
-            if (bmi >= 40) {
-                var text = "Súlyosan elhízott (III. fokú)";
-            }
-            else if (bmi >= 35 && bmi <= 39.9) {
-                var text = "Elhízott (II. fokú)";
-            }
-            else if (bmi >= 30 && bmi <= 34.9) {
-                var text = "Elhízott (I. fokú)";
-            }
-            else if (bmi >= 25 && bmi <= 29.9) {
-                var text = "Túlsúlyos";
-            }
-            else if (bmi >= 18.5 && bmi <= 24.9) {
-                var text = "Normál testsúly";
-            }
-            else if (bmi >= 17 && bmi <= 18.4) {
-                var text = "Enyhe soványság";
-            }
-            else if (bmi >= 16 && bmi <= 16.9) {
-                var text = "Mérsékelt soványság";
-            }
-            else {
-                var text = "Súlyos soványság";
-            }
-
-
-            document.getElementById("bmi").innerHTML = (`Az állapotod: ${text}: <br>BMI: (${bmi.toFixed(1)})`);
-
-        });
+          text.innerHTML = `Az állapotod: ${result} <br> (BMI: ${bmi.toFixed(
+            2
+          )})`;
+        }
+      });
     </script>
-</body>
-
+  </body>
 </html>

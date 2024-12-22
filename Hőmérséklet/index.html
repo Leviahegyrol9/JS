@@ -1,44 +1,53 @@
 <!DOCTYPE html>
 <html lang="en">
-
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
-</head>
-
-<body>
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Hőmérséklet Átváltó</title>
+  </head>
+  <body>
     <style>
-        .center {
-            text-align: center;
-        }
+      body {
+        text-align: center;
+      }
+      button {
+        border-radius: 5px;
+      }
+      button:hover {
+        color: white;
+        background-color: black;
+      }
     </style>
-
-    <div class="center">
-        <h1>Hőmérséklet átváltó</h1>
-        <p>Adja meg a celsius hőmérsékletet:</p>
-        <input type="number" id="deg">
-        <button id="button">Számítás</button>
-        <br>
-        <br>
-        <span id="f"> </span>
-        <br>
-        <span id="k"></span>
-    </div>
+    <h1>Hőmérséklet Átváltó</h1>
+    <p>Adja meg a Celsius hőmérsékletet:</p>
+    <input type="number" id="celsius" />
+    <button id="button">Számítás</button>
+    <br /><br />
+    <span id="text"></span>
 
     <script>
-        const deg = document.getElementById("deg");
-        const button = document.getElementById("button");
+      const celsius = document.getElementById("celsius");
+      const button = document.getElementById("button");
+      const text = document.getElementById("text");
+      var farenheit;
+      var kelvin;
 
-        button.addEventListener("click", () => {
-            var kelvin = deg.value + 273.15
-            var farenheit = deg.value * 1.8 + 32
+      button.addEventListener("click", () => {
+        if (celsius.value == "") {
+          alert("Töltse ki a mezőt!");
+        } else {
+          farenheit = parseFloat(celsius.value) * 1.8 + 32;
+          kelvin = parseFloat(celsius.value) + 273.15;
 
-            document.getElementById("f").innerHTML = (`<span>${deg.value} &deg;C</span> = <span><b>${farenheit}</b> &deg;F</span>`);
-            document.getElementById("k").innerHTML = `<span>${deg.value} &deg;C</span> = <b>${kelvin}</b> K`;
-
-        });
+          text.innerHTML = `<span>${
+            celsius.value
+          } &deg;C</span> = <span><b>${farenheit.toFixed(
+            2
+          )}</b> &deg;F</span><br><span>${
+            celsius.value
+          } &deg;C</span> = <b>${kelvin.toFixed(2)}</b> K`;
+        }
+      });
     </script>
-</body>
-
+  </body>
 </html>
