@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <style>
+        table, th, td{
+            border: 1px solid black;
+            border-radius: 5px;
+            border-collapse: collapse;
+        }
+        
+    </style>
+
+    <button type="submit">Hozzáad</button>
+    <table>
+        <thead>
+            <tr>
+                <th>Név</th>
+                <th>Életkor</th>
+            </tr>
+        </thead>
+
+        <tbody>
+            <tr>
+                <td><input type="text" id="name"></td>
+                <td><input type="number" min="1" id="age"></td>
+            </tr>
+        </tbody>
+    </table>
+
+    <script>
+        const table = document.querySelector("table");
+        const button = document.querySelector("button");
+        const name = document.getElementById("name");
+        const age = document.getElementById("age");
+
+        button.addEventListener("click", () => {
+            if (name.value == "" || age.value == "" || name.length < 3 || age.value < 1){
+                alert("Adjon meg egy nevet és egy életkort!")
+            }
+            else{
+                var row = table.insertRow(-1);
+                var cell1 = row.insertCell(0);
+                var cell2 = row.insertCell(1);
+                
+                cell1.innerHTML = name.value;
+                cell2.innerHTML = age.value;
+            }           
+        });
+
+        
+    </script>
+</body>
+</html>
