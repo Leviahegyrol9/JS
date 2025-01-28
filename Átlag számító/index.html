@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="hu">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Átlag számító</title>
+</head>
+<body>
+    <style>
+        td{
+            border: 2px solid black;
+            border-collapse: collapse;
+        }
+    </style>
+
+<button id="addBtn">Add</button>
+    <table>
+        <thead>
+            <tr>
+                <th>Tantárgyak</th>
+                <th>Jegy</th>
+                <th>Átlag</th>
+            </tr>
+        </thead>
+
+        <tbody>
+            <tr>
+                <td><input type="text" id="subject"></td>
+                <td><input type="text" id="marks"></td>
+                <td id="average"></td>
+            </tr>
+        </tbody>
+    </table>
+
+    <script>
+        const addBTN = document.querySelector("#addBtn");
+        const subject = document.querySelector("#subject");
+        const mark = document.querySelector("#marks")
+        const table = document.querySelector("table");
+        const averageTd = document.querySelector("#average");
+        var sum2 = 0;
+        var sum = 0;
+        var average = [];
+
+        addBTN.addEventListener("click", () =>{
+            var row = table.insertRow(-1);
+            var cell1 = row.insertCell(0);
+            var cell2 = row.insertCell(1);
+            var cell3 = row.insertCell(2);
+
+            cell1.innerHTML = subject.value;
+            var marks = mark.value.split(' ');
+            cell2.innerHTML = mark.value;
+
+            marks.forEach(num => {
+                sum += parseInt(num);
+            });
+
+            cell3.innerHTML = `${(sum / marks.length).toFixed(2)}`;
+
+            average.push(parseFloat(cell3.textContent))
+
+            sum = 0;
+
+            average.forEach(num => {
+                sum2 += parseFloat(num);
+            });
+
+            averageTd.innerHTML = `${(sum2 / average.length).toFixed(2)}`;
+
+            sum2 = 0;
+        })
+    </script>
+</body>
+</html>
