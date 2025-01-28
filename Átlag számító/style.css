@@ -1,0 +1,20 @@
+table{
+    width: 30vw;
+    height: auto;
+    margin: 0 auto;
+}
+input{
+    width: 95%;
+    border: none;
+}
+input:focus{
+    border: 2px solid black;
+    border-radius: 3px;
+}
+td:not(#noBorder){
+    border: 2px solid black;
+    border-collapse: collapse;
+}
+td input{
+    text-align: center;
+}
