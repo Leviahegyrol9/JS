@@ -1,20 +1,29 @@
 table{
-    width: 30vw;
-    height: auto;
+    width: 40vw;
+    height: 8vh;
     margin: 0 auto;
 }
 input{
-    width: 95%;
+    width: 96%;
     border: none;
+    outline: none;
 }
-input:focus{
-    border: 2px solid black;
-    border-radius: 3px;
-}
-td:not(#noBorder){
+td{
     border: 2px solid black;
     border-collapse: collapse;
+    border-radius: 3px;
 }
-td input{
-    text-align: center;
+button{
+    background-color: white;
+    color: blue;
+    border: none;
+    border-radius: 5px;
+    width: 100%;
+    height: 100%;
+    transition: all 1s;
+    font-weight: bold;
+}
+button:hover{
+    background-color: blue;
+    color: white;
 }
