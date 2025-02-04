@@ -1,7 +1,7 @@
 const addBTN = document.querySelector("#addBtn");
 const subject = document.querySelector("#subject");
 const mark = document.querySelector("#marks")
-const table = document.querySelector("table");
+const table = document.querySelector("tbody");
 const averageTd = document.querySelector("#average");
 var averages = [];
 
@@ -12,6 +12,9 @@ addBTN.addEventListener("click", () =>{
 
     else{
         AddItems();
+
+        subject.value = "";
+        mark.value = "";
 
         var allAverage = parseFloat(GetAverage(averages));
 
