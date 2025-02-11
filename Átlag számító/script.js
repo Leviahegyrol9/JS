@@ -19,7 +19,7 @@ addBTN.addEventListener("click", () =>{
         var allAverage = parseFloat(GetAverage(averages));
 
         averageTd.innerHTML = allAverage;
-    }        
+    }
 })
 
 function AddItems() {
@@ -27,7 +27,7 @@ function AddItems() {
     var cell1 = row.insertCell(0);
     var cell2 = row.insertCell(1);
     var cell3 = row.insertCell(2);
-
+    var cell4 = row.insertCell(3);
 
     cell1.innerHTML = subject.value;
     var marks = mark.value.trim().split(' ');
@@ -37,7 +37,9 @@ function AddItems() {
 
     cell3.innerHTML = average;
 
-    averages.push(average)
+    averages.push(average);
+
+    cell4.innerHTML = `<button onclick="Delete()">X</button>`;
 }
 
 function GetAverage(array) {
@@ -47,7 +49,7 @@ function GetAverage(array) {
         sum += parseFloat(num);
     });
 
-    return `${(sum / array.length).toFixed(2)}`
+    return (sum / array.length).toFixed(2);
 }
 
 function IsNumber(text) {
@@ -60,4 +62,8 @@ function IsString(text) {
     let regex = /^[a-zA-ZáéíóöőúüűÁÉÍÓÖŐÚÜŰ ]+$/;
 
     return regex.test(text);
+}
+
+function Delete() {
+    document.querySelector("tbody").deleteRow(1);
 }
