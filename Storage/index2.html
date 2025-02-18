@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <input type="text">
+    <button onclick="SaveButton()">Save</button>
+
+    <ul></ul>
+
+    <script>
+        const input = document.querySelector("input");
+        const storage = document.querySelector("ul");
+
+        const cart = [];
+
+        if (localStorage.getItem("cart") != null){
+            JSON.parse(localStorage.getItem("cart")).forEach((item) =>{
+                cart.push(item);
+            })
+        }
+
+        cart.forEach((item) => {
+            storage.appendChild(document.createElement("li")).innerHTML = input.value
+        })
+
+        function SaveButton(){
+            cart.push(input.value);
+            localStorage.setItem("cart", JSON.stringify(cart))
+        }
+    </script>
+</body>
+</html>

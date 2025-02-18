@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <input type="text" id="name">
+    <button onclick="SaveButton()">Save</button>
+    <br>
+    Mentett érték: 
+    <span></span>
+
+    <script>
+        const name = document.getElementById("name");
+        const result = document.querySelector("span");
+        const currentValue = localStorage.getItem("nev");
+
+        if(currentValue !== null){
+            result.innerHTML = currentValue;
+        }
+
+        function SaveButton(){
+            localStorage.setItem("nev", name.value)
+            result.innerHTML = localStorage.getItem("nev");
+        }
+    </script>
+</body>
+</html>
