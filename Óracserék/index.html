@@ -51,7 +51,7 @@
                 let link = Array.from(doc.querySelectorAll("a")).find(a => a.textContent.includes(GetTomorrow()))
                 info.innerHTML = `<a href="${link.href}">${link.textContent}</a>`;
             })
-            .catch(error => info.innerHTML = `Hiba törént: ${error}`);
+            .catch(error => info.innerHTML = `Nincs óracsere ezen a napon: ${GetTomorrow()}`);
 
             function GetTomorrow(){
                 let today = new Date();
