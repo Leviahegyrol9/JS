@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="hu">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="shortcut icon" href="https://szg-vasvari.cms.intezmeny.edir.hu/uploads/logo_cea7af9c46.svg" type="image/x-icon">
+    <title>Óracsere kereső</title>
+</head>
+<body>
+    <style>
+        body {
+            margin: 50px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            background-color: #f4f4f4;
+        }
+        span{
+            margin: 0 auto;
+            background-color: #04AA6D;
+            border: none;
+            color: white;
+            padding: 15px 32px;
+            text-align: center;
+            display: inline-block;
+            font-size: large;
+            outline: 3px solid black;
+            border-radius: 5px;
+            box-shadow: 10px 10px 27px 8px rgba(0,0,0,0.75);
+        }
+        a:hover{
+            color: black;
+        }
+        a{
+            color: white;
+            text-decoration: none;
+        }
+    </style>
+    
+    <span></span>
+
+    <script>
+        const info = document.querySelector("span");
+        fetch("https://corsproxy.io/?url=https://www.vasvari.hu/p/oracserek")
+            .then(response => response.text())
+            .then(html => {
+                // Ideiglenes DOM elem létrehozása a HTML-ből
+                let doc = new DOMParser().parseFromString(html, "text/html");
+
+                // Keresés az <a> elemek között, amelyek tartalmazzák az adott szöveget
+                let link = Array.from(doc.querySelectorAll("a")).find(a => a.textContent.includes(GetTomorrow()))
+                info.innerHTML = `<a href="${link.href}">${link.textContent}</a>`;
+            })
+            .catch(error => info.innerHTML = `Hiba törént: ${error}`);
+
+            function GetTomorrow(){
+                let today = new Date();
+                let tomorrow = new Date(today);
+                tomorrow.setDate(today.getDate() + 2);
+
+                return tomorrow.toLocaleDateString();
+            }
+    </script>
+</body>
+</html>
