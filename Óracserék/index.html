@@ -37,41 +37,24 @@
         }
         button {
             border: none;
-            color: white;
-            padding: 15px 32px;
-            font-size: large;
-            outline: 3px solid black;
-            border-radius: 5px;
-            box-shadow: 5px 5px 15px rgba(0, 0, 0, 0.5);
             cursor: pointer;
         }
-        #today {
-            background-color: #04AA6D;
+        span {
+            text-align: center;
+            min-width: 200px;
         }
-        #tomorrow {
-            background-color: #008CBA;
-        }
-        #green {
-            background-color: #04AA6D;
+        button, span {
             color: white;
             padding: 15px 32px;
             font-size: large;
-            text-align: center;
-            outline: 3px solid black;
             border-radius: 5px;
-            box-shadow: 5px 5px 15px rgba(0, 0, 0, 0.5);
-            min-width: 200px;
+            box-shadow: 5px 5px 15px rgba(0, 0, 0, 0.7);
         }
-        #blue{
+        #today, #green {
+            background-color: #04AA6D;
+        }
+        #tomorrow, #blue {
             background-color: #008CBA;
-            color: white;
-            padding: 15px 32px;
-            font-size: large;
-            text-align: center;
-            outline: 3px solid black;
-            border-radius: 5px;
-            box-shadow: 5px 5px 15px rgba(0, 0, 0, 0.5);
-            min-width: 200px;
         }
         a {
             color: white;
@@ -86,64 +69,59 @@
 <body>
     <div class="container">
         <div>
-            <button id="today" onclick="GetDay(0)">Ma</button>
-            <button id="tomorrow" onclick="GetDay(1)">Holnap</button>
+            <button id="today" onclick="ClickEvent(0)">Ma</button>
+            <button id="tomorrow" onclick="ClickEvent(1)">Holnap</button>
         </div>
         <span>Nincs adat</span>
     </div>
 
     <script>
         const info = document.querySelector("span");
-        info.innerHTML = localStorage.getItem("btn");
+        localStorage.getItem("day") == 0 ? GetLink(0) : GetLink(1);
         info.id = localStorage.getItem("id");
 
-        function GetDay(day){
-            switch (day){
-                case 0:
-                    info.id = "green";
-                    break;
-                case 1:
-                    info.id = "blue";
-                    break;
-            }
+        function ClickEvent(day){
+            day == 0 ? info.id = "green" : info.id = "blue";
 
+            localStorage.setItem("id", info.id);
+            localStorage.setItem("day", day)
+
+            GetLink(day);
+        }
+
+        function GetDay(day){
+            let today = new Date();
+
+            switch (day){
+                case 1:
+                    let tomorrow = new Date(today);
+                    tomorrow.setDate(today.getDate() + 1);
+                    return tomorrow.toLocaleDateString();
+
+                default:
+                    return today.toLocaleDateString();
+            }
+        }
+
+        function GetLink(day){
             fetch("https://corsproxy.io/?url=https://www.vasvari.hu/p/oracserek")
             .then(response => response.text())
             .then(html => {
                 // Ideiglenes DOM elem létrehozása a HTML-ből
                 let doc = new DOMParser().parseFromString(html, "text/html");
 
-                let link = Array.from(doc.querySelectorAll("a")).find(a => a.textContent.includes(GetTomorrow(day)))
+                let link = Array.from(doc.querySelectorAll("a")).find(link => link.textContent.includes(GetDay(day)))
 
                 if (link){
                     info.innerHTML = `<a href="${link.href}">${link.textContent}</a>`;
-                    localStorage.setItem("btn", info.innerHTML);
                 }
                 else{
-                    info.textContent = `Nincs óracsere ezen a napon: ${GetTomorrow()}`;
-                    localStorage.setItem("btn", info.textContent);
+                    info.textContent = `Nincs óracsere ezen a napon: ${GetDay()}`;
                 }
                 
             })
             .catch(error => info.textContent = `Hiba történt: ${error.message}`);
-
-            
-            localStorage.setItem("id", info.id);
         }
-
-            function GetTomorrow(day){
-                let today = new Date();
-
-                switch (day){
-                    case 1:
-                        let tomorrow = new Date(today);
-                        tomorrow.setDate(today.getDate() + 1);
-                        return tomorrow.toLocaleDateString();
-
-                    default:
-                        return today.toLocaleDateString();
-                }       
-            }
     </script>
 </body>
 </html>
