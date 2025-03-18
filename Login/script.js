@@ -7,8 +7,8 @@ const username = "admin";
 const password = "12345";
 
 if (sessionStorage.getItem("login") == 1){
-    inputUn.value = "admin";
-    inputPw.value = "12345";
+    inputUn.value = username;
+    inputPw.value = password;
     ShowDiv();
 }
 
@@ -17,7 +17,8 @@ function Login(){
         info.style.color = "green";
         info.innerHTML = "Sikeres bejelntkezés!"
         sessionStorage.setItem("login", 1);
-        ShowDiv();
+        document.getElementById("login").style.visibility = "hidden";
+        p.innerHTML = `Üdvözlöm ${username}!`
     }
     else{
         info.style.color = "red";
@@ -26,6 +27,11 @@ function Login(){
     }
 }
 
-function ShowDiv(){
-    p.innerHTML = `Üdvözlöm ${username}`
+function ShowPw(){
+    if (inputPw.type == "password"){
+        inputPw.type = "text";
+    }
+    else{
+        inputPw.type = "password";
+    }    
 }
