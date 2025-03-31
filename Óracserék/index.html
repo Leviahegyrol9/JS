@@ -78,11 +78,11 @@
 
     <script>
         const info = document.querySelector("span");
-        const lS = localStorage.getItem("day");
 
-        if (lS != null) GetLink(localStorage.getItem("day"));
-
-        info.id = localStorage.getItem("id");
+        if (localStorage.getItem("day") != null && localStorage.getItem("id") != null){
+            GetLink(parseInt(localStorage.getItem("day")));
+            info.id = localStorage.getItem("id");
+        }
 
         function ClickEvent(day){
             day == 0 ? info.id = "green" : info.id = "blue";
