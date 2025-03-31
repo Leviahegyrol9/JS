@@ -78,7 +78,10 @@
 
     <script>
         const info = document.querySelector("span");
-        localStorage.getItem("day") == 0 ? GetLink(0) : GetLink(1);
+        const lS = localStorage.getItem("day");
+
+        if (lS != null) GetLink(localStorage.getItem("day"));
+
         info.id = localStorage.getItem("id");
 
         function ClickEvent(day){
