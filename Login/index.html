@@ -3,30 +3,50 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="bootstrap.min.css">
     <title>Login</title>
 </head>
 <body>
-    <div id="login">
-        <p>Jelentkezzen be</p>
-        <input type="text" placeholder="Felhasználónév" id="username">
-        <br>
-        <br>
-        <input type="password" placeholder="Jelszó" id="password">
-        <br>
-        <br>
-        <label for="label">Mutasd a jelszót</label>
-        <input type="checkbox" id="label" onclick="ShowPw()">
-        <br>
-        <br>
-        <button onclick="Login()">Bejelentkezés</button>
-        <p id="info"></p>
+    <div class="container mt-5" id="login">
+        <h2 class="text-center mb-4">Jelentkezzen be</h2>
+        
+        <div class="mb-3">
+            <label for="username" class="form-label">Felhasználónév</label>
+            <input type="text" class="form-control" id="username" placeholder="Felhasználónév">
+        </div>
+
+        <div class="mb-3">
+            <label for="password" class="form-label">Jelszó</label>
+            <input type="password" class="form-control" id="password" placeholder="Jelszó">
+        </div>
+
+        <div class="form-check mb-3">
+            <input type="checkbox" class="form-check-input" id="label" onclick="ShowPw()">
+            <label class="form-check-label" for="label">Mutasd a jelszót</label>
+        </div>
+
+        <div class="text-center">
+            <button class="btn btn-primary" onclick="Login()">Bejelentkezés</button>
+        </div>
+        
+        <p id="info" class="text-center text-danger mt-3"></p>
     </div>
 
-    <div>
-        <p id="success"></p>
-    </div>
+    <div class="container mt-5" id="success" style="display:none;">
+        <h3 class="text-center mb-4">Sikeres Bejelentkezés</h3>
+        
+        <div class="mb-3">
+            <textarea class="form-control" rows="10" cols="40"></textarea>
+        </div>
 
+        <div class="text-center">
+            <button class="btn btn-success" onclick="SaveBtn()">Mentés</button>
+            <button class="btn btn-warning" onclick="ClearList()">Lista ürítése</button>
+            <button class="btn btn-danger" onclick="DeleteLast()">Utolsó törlése</button>
+            <button class="btn btn-dark" onclick="LogOut()">Kijelentkezés</button>
+        </div>
+        <ul></ul>
+    </div>
     <script src="script.js"></script>
 </body>
 </html>

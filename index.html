@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <textarea id="note" cols="50" rows="10"> </textarea>
+    <br />
+    <button onclick="Save()">Mentes</button>
+
+    <ul id="allNote"></ul>
+  </body>
+  <script>
+    const notes = [];
+    const textbox = document.getElementById("note");
+    const allNote = document.getElementById("allNote");
+
+    if (localStorage.getItem("notes") !== null) {
+      JSON.parse(localStorage.getItem("notes")).forEach((element) => {
+        notes.push(element);
+      });
+    }
+
+    notes.forEach((element) => {
+      const li = document.createElement("li");
+      li.innerHTML = element;
+      allNote.appendChild(li);
+    });
+
+    const Save = () => {
+      if (textbox.value.split("\n").length > 1){
+        textbox.value.split("\n").forEach((item) => {
+          const li = document.createElement("li");
+          li.innerHTML = JSON.stringify(item);
+        allNote.appendChild(li)
+        notes.push(item);
+      })
+      }
+      else{
+        allNote.appendChild(document.createElement("li")).innerHTML = JSON.stringify(textbox.value);
+        notes.push(textbox.value);
+      }
+
+      localStorage.setItem("notes", JSON.stringify(notes));
+      console.log(notes);
+      console.log(localStorage.getItem("notes"));
+
+    };
+  </script>
+</html>
