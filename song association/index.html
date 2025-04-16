@@ -7,6 +7,10 @@
 </head>
 <body>
     <style>
+        html, body{
+            overflow-x: hidden;
+            width: 100%;
+        }
         body{
             background-color: rgb(228, 228, 228);
             font-size: 20px;
@@ -26,6 +30,26 @@
         }
         span{
             font-weight: bold;
+        }
+        button{
+            border-radius: 5px;
+            background-color: rgb(228, 228, 228);
+            border: none;
+            outline: 2px solid black;
+            font-size: 14px;
+        }
+        @media (hover: hover) and (pointer: fine) {
+            button:hover{
+                background-color: black;
+                color: white;
+                cursor: pointer;
+            }
+        }
+        @media (max-width: 600px){
+            div{
+                width: 200px;
+                height: 100px;
+            }
         }
     </style>
     <h1>Song association</h1>
@@ -89,14 +113,14 @@
             }
         }
 
-        function SelectWord(list){
-            if (list.length == 0) location.reload();
-            else{
-                let randomIndex = Math.floor(Math.random() * list.length);
-                let selectedWord = list.pop(list[randomIndex]);
+        function SelectWord(list) {
+            if (list.length === 0) location.reload();
+            
+            let randomIndex = Math.floor(Math.random() * list.length);
+            let selectedWord = list[randomIndex];
+            list.splice(randomIndex, 1);
 
-                return selectedWord;
-            }
+            return selectedWord;
         }
     </script>
 </body>
