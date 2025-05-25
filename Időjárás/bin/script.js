@@ -25,18 +25,13 @@ function checkApiKey() {
                     loginPanel.style.display = "none";
                     weatherPanel.style.display = "block";
                 }
-                else {
-                    alert(data.message);
-                }
-                
+                else alert(data.message);       
             })
 }
 
-async function searchBtn() {
+function searchBtn() {
     if (cityInput.value) {
-        await fetchWeather(cityInput.value);
-
-        sessionStorage.setItem("city", cityInput.value);
+        fetchWeather(cityInput.value);
     }
 }
 
@@ -49,6 +44,8 @@ function fetchWeather(city) {
                                 <p>${`${Math.round(data.main.temp)}°C`}</p>
                                 <p>${data.weather[0].description}</p>
             `;
+
+            sessionStorage.setItem("city", data.name);
         })
         .catch(error => {
             alert('Nem sikerült hozzáférni az adatokhoz!', error);
