@@ -47,8 +47,8 @@ function fetchWeather(city) {
 
             sessionStorage.setItem("city", data.name);
         })
-        .catch(error => {
-            alert('Nem sikerült hozzáférni az adatokhoz!', error);
+        .catch(() => {
+            alert('Nem sikerült hozzáférni az adatokhoz!');
         });
 }
 
