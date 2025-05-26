@@ -4,10 +4,12 @@ const cityInput = document.getElementById("cityInput");
 const weatherInfo = document.querySelector(".weather-info");
 const loginPanel = document.getElementById("login");
 const weatherPanel = document.getElementById("weather");
+const logOutBtn = document.getElementById("logOutBtn");
 
 if(apiKey != null) {
     loginPanel.style.display = "none";
     weatherPanel.style.display = "block";
+    logOutBtn.style.display = "block";
 }
 
 if (sessionStorage.getItem("city") != null) {
@@ -24,8 +26,12 @@ function checkApiKey() {
                     localStorage.setItem("apiKey", apiKey);
                     loginPanel.style.display = "none";
                     weatherPanel.style.display = "block";
+                    logOutBtn.style.display = "block";
                 }
-                else alert(data.message);       
+                else {
+                    alert(data.message);
+                    apiKeyInput.value = "";
+                }      
             })
 }
 
