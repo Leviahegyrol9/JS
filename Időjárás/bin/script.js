@@ -52,6 +52,7 @@ function fetchWeather(city) {
             `;
 
             sessionStorage.setItem("city", data.name);
+            cityInput.value = data.name;
         })
         .catch(() => {
             alert('Nem sikerült hozzáférni az adatokhoz!');
