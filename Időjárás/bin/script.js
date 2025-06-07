@@ -42,7 +42,7 @@ function searchBtn() {
 }
 
 function fetchWeather(city) {
-    fetch(`https://api.openweathermap.org/data/2.5/weather?q=${city}&appid=${apiKey}&units=metric&lang=hu`)
+    fetch(`https://api.openweathermap.org/data/2.5/weather?q=${city}&appid=${apiKey}&units=metric&lang=${navigator.language.split('-')[0]}`)
         .then(response => response.json())
         .then(data => {
             weatherInfo.innerHTML =`
