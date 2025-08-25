@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="hu">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Étlap</title>
+</head>
+<body>
+    <style>
+        html, body{
+            overflow-x: hidden;
+            width: 100%;
+        }
+        body{
+            background-color: rgb(228, 228, 228);
+            font-size: 20px;
+        }
+        h1{
+            text-align: center;
+            margin-bottom: 50px;
+        }
+        div{
+            text-align: center;
+            background-color: white;
+            width: 25vw;
+            height: 15vh;
+            margin: 0 auto;
+            border-radius: 10px;
+            padding: 25px;
+        }
+        span{
+            font-weight: bold;
+        }
+        button{
+            border-radius: 5px;
+            background-color: rgb(228, 228, 228);
+            border: none;
+            outline: 2px solid black;
+            font-size: 14px;
+        }
+        @media (hover: hover) and (pointer: fine) {
+            button:hover{
+                background-color: black;
+                color: white;
+                cursor: pointer;
+            }
+        }
+        @media (max-width: 600px){
+            div{
+                width: 200px;
+                height: 100px;
+            }
+        }
+    </style>
+    <h1>Étlap</h1>
+    <div>
+        <p></p>
+        <button onclick="Generate()">Generálás</button>
+    </div>
+
+    <script>
+        const foods = document.querySelector("p");
+
+        
+
+        function Generate() {
+
+        }
+
+        function SelectWord(list) {
+            if (list.length === 0) location.reload();
+            
+            let randomIndex = Math.floor(Math.random() * list.length);
+            let selectedWord = list[randomIndex];
+            list.splice(randomIndex, 1);
+
+            return selectedWord;
+        }
+    </script>
+</body>
+</html>
