@@ -11,27 +11,32 @@
             overflow-x: hidden;
             width: 100%;
         }
-        body{
-            background-color: rgb(228, 228, 228);
+        body {
+            background-image: url('https://raw.githubusercontent.com/Leviahegyrol9/Main/main/background.jpeg');
+            background-size: cover;
+            background-position: center;
+            background-attachment: fixed;
             font-size: 20px;
+
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;   
         }
-        h1{
-            text-align: center;
-            margin-bottom: 50px;
-        }
-        div{
-            text-align: center;
-            background-color: white;
+        div {
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            align-items: center;
+            background-color: whitesmoke;
             width: 25vw;
-            height: 15vh;
+            height: 20vh;
             margin: 0 auto;
-            border-radius: 10px;
+            border-radius: 15px;
             padding: 25px;
         }
-        span{
-            font-weight: bold;
-        }
-        button{
+        button {
             border-radius: 5px;
             background-color: rgb(228, 228, 228);
             border: none;
@@ -52,29 +57,53 @@
             }
         }
     </style>
-    <h1>Étlap</h1>
     <div>
-        <p></p>
+        <span id="soup"></span>
+        <br>
+        <span id="main"></span>
+        <br>
+        <span id="dessert"></span>
+        <br>
         <button onclick="Generate()">Generálás</button>
     </div>
 
     <script>
-        const foods = document.querySelector("p");
+        const lsSoup = localStorage.getItem("soup");
+        const lsMain = localStorage.getItem("main");
+        const lsDessert =localStorage.getItem("dessert");
 
-        
+        const soupRow = document.getElementById("soup");
+        const mainRow = document.getElementById("main");
+        const dessertRow = document.getElementById("dessert");
 
-        function Generate() {
-
+        if (lsSoup && lsMain && lsDessert) {
+            soupRow.innerHTML = lsSoup;
+            mainRow.innerHTML = lsMain;
+            dessertRow.innerHTML = lsDessert;
+        }
+        else {
+            Generate();
         }
 
-        function SelectWord(list) {
-            if (list.length === 0) location.reload();
-            
-            let randomIndex = Math.floor(Math.random() * list.length);
-            let selectedWord = list[randomIndex];
-            list.splice(randomIndex, 1);
+        function Generate() {
+        fetch("https://leviahegyrol9.github.io/Main/menu.json")
+        .then(response => response.json())
+        .then(data => {
 
-            return selectedWord;
+        var soup = data.levesek[Math.floor(Math.random() * data.levesek.length)];
+        var main = data.foetelek[Math.floor(Math.random() * data.foetelek.length)];
+        var dessert = data.desszertek[Math.floor(Math.random() * data.desszertek.length)];
+
+        soupRow.innerHTML = `<b>Leves:</b> ${soup}`;
+        mainRow.innerHTML = `<b>Főétel:</b> ${main}`;
+        dessertRow.innerHTML = `<b>Desszert:</b> ${dessert}`;
+
+        localStorage.setItem("soup", soupRow.innerHTML);
+        localStorage.setItem("main", mainRow.innerHTML);
+        localStorage.setItem("dessert", dessertRow.innerHTML);
+
+        })
+        .catch(error => console.error("Hiba történt:", error));
         }
     </script>
 </body>
