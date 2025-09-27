@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="bootstrap.min.css">
+    <title>Regisztráció</title>
+</head>
+<body>
+    <div class="container mt-5">
+        <h2 class="text-center mb-4">Regisztrálás</h2>
+        
+        <div class="mb-3">
+            <label for="username" class="form-label">Email</label>
+            <input type="text" class="form-control" id="email" placeholder="Email">
+        </div>
+
+        <div class="mb-3">
+            <label for="password" class="form-label">Jelszó</label>
+            <input type="password" class="form-control" id="password" placeholder="Jelszó">
+        </div>
+
+        <div class="mb-3">
+            <label for="password" class="form-label">Jelszó mégegyszer</label>
+            <input type="password" class="form-control" id="passwordAgain" placeholder="Jelszó megegyszer">
+        </div>
+
+        <div class="form-check mb-3">
+            <input type="checkbox" class="form-check-input" id="label" onclick="ShowPw()">
+            <label class="form-check-label" for="label">Mutasd a jelszót</label>
+        </div>
+
+        <div class="text-center">
+            <button class="btn btn-primary" onclick="Registration()">Regisztráció</button>
+        </div>
+        <br>
+        <h4 class="text-center mb-4"></h4>
+    </div>
+    <script src="script.js"></script>
+</body>
+</html>
