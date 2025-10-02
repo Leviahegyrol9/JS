@@ -7,8 +7,11 @@ const emailRegex = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
 
 function Registration(){
     const isValidEmail = emailRegex.test(inputEmail.value);
-
-    if(!isValidEmail){
+    if(inputEmail.value == "" || inputPw.value == "" || inputPwAgain.value == ""){
+        info.style.color = "red";
+        info.innerHTML = "Töltse ki a mezőket!"
+    }
+    else if(!isValidEmail){
         info.style.color = "red";
         info.innerHTML = "Hibás email cím!"
     }  
