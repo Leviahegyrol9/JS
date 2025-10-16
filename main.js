@@ -1,7 +1,3 @@
-function crap(x, bags, cap){
-    x.forEach(list => {
-        list.forEach(element => {
-            
-        });
-    });
-  }
+function myParseInt(str) {
+    return Number(str.replace(/[^0-9]/g, ""));
+}
