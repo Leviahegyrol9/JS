@@ -57,7 +57,7 @@ function AddCar() {
         alert("Minden mezőt ki kell tölteni!");
         return;
     }
-    else if (!IsString(brand) || year.length != 4 || year > date.getFullYear()){
+    else if (!IsString(brand) || year < 1850 || year > date.getFullYear()){
         alert("Rosszul adta meg az adatokat!");
         return;
     }
