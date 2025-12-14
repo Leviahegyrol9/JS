@@ -1,0 +1,72 @@
+body {
+    font-family: Arial, Helvetica, sans-serif;
+    background: linear-gradient(to bottom right, black, white, black);
+    min-height: 100vh;
+}
+h1 {
+    text-align: center;
+}
+.container {
+    max-width: 600px;
+    margin: auto;
+    background-color: white;
+    padding: 20px;
+    border-radius: 8px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+.container > button{
+    background-color: #2E2EFF;
+}
+.container > button:hover{
+    background-color: #0000D1;
+}
+input, button {
+    padding: 10px;
+    margin-top: 10px;
+    border-radius: 6px;
+}
+input{
+    width: 90%;
+}
+button{
+    cursor: pointer;
+    width: 25%;
+    color: white;
+    font-weight: bold;
+}
+ul {
+    list-style: none;
+    padding: 0;
+    width: 90%;
+}
+#carList li {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background-color: #f0f0f0;
+    padding: 10px 12px;
+    margin-bottom: 8px;
+    border-radius: 8px;
+}
+
+.actions {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+.cB {
+    transform: scale(1.2);
+    cursor: pointer;
+}
+.delete {
+    width: 80px;
+    height: 28px;
+    font-size: 10px;
+    background-color: #e53935;
+    border: none;
+}
+.delete:hover {
+    background-color: #c62828;
+}

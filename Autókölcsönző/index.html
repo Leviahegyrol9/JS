@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="hu">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="bin/style.css">
+    <link rel="shortcut icon" href="bin/car.ico" type="image/x-icon">
+    <title>Autókölcsönző</title>
+</head>
+<body>
+    <h1>🚗 Autókölcsönző 🚗</h1>
+
+    <div class="container">
+        <h2>Autó hozzáadása</h2>
+        <input type="text" id="brand" placeholder="Márka (pl. Toyota)">
+        <input type="text" id="model" placeholder="Modell (pl. Corolla)">
+        <input type="number" id="year" placeholder="Évjárat (pl. 2020)">
+        <button onclick="AddCar()">Hozzáadás</button>
+
+        <h2>Elmentett autók</h2>
+        <ul id="carList"></ul>
+    </div>
+
+    <script src="bin/script.js"></script>
+</body>
+</html>
