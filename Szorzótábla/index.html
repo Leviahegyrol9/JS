@@ -17,6 +17,8 @@
             border: 3px solid black;
             border-radius: 10px;
             padding: 20px;
+            position: relative;
+            border: 1px solid #ccc;
         }
         span{
             font-size: 35px;
@@ -48,22 +50,29 @@
             background-color: black;
             color: white;
         }
+        #row {
+            position: absolute;
+            top: 0;
+            left: 0;
+            padding: 5px;
+        }
     </style>
     
     <div>
+    <span id="row">0🔥</span>
     <span id="first"></span>
     <span>&nbsp;*&nbsp;</span>
     <span id="second"></span>
     <br>
     <br>
-    <button onclick="location.reload();">Szám generálása</button>
+    <button onclick="Generate()">Szám generálása</button>
     <br>
     <br>
     <label for="answer">Válasz:</label>
     <input type="number" id="answer">
     <br>
     <br>
-    <button id="check">Ellenőrzés</button>
+    <button onclick="Check()">Ellenőrzés</button>
     <br>
     <br>
     <span id="rating"></span>
@@ -74,38 +83,46 @@
         const second = document.getElementById("second");
         const answer = document.getElementById("answer");
         const rating = document.getElementById("rating");
-        const button = document.getElementById("check");
+        const row = document.getElementById("row");
+		
+        let count = 0;
+		let result;
+		Generate();
+		
+		function Generate(){
+			rating.textContent = "";
+			answer.value = "";
+			
+			let firstNum = Math.floor(Math.random() * 10);
 
-        const firstNum = Math.floor(Math.random() * 10);
+			let secondNum = Math.floor(Math.random() * 10);
 
-        const secondNum = Math.floor(Math.random() * 10);
+			result = firstNum * secondNum;
 
-        const result = firstNum * secondNum;
+			first.textContent = firstNum;
+			second.textContent = secondNum;
+		}    
 
-        first.innerHTML = firstNum;
-        second.innerHTML = secondNum;
-
-        console.log(answer.value)
-
-        button.addEventListener("click", () => {
+        function Check(){
             if(answer.value == ""){
                 rating.style.color = "red";
-                rating.innerHTML = ("Adja meg a választ!");
+                rating.textContent = "Adja meg a választ!";
             }
             else{
                 if(answer.value == result){
-                    rating.style.color = "green";
-                    rating.innerHTML = ("A válasz helyes!");
-                }
+                    Generate();
+                    count++;
+                    row.textContent = `${count}🔥`
+
+                } 
                 else{
                     rating.style.color = "red";
-                    rating.innerHTML = (`A válasz helytelen!<br>A megoldás: ${result}`);
+                    rating.innerHTML = `A válasz helytelen!<br>A megoldás: ${result}`;
+                    count = 0;
+                    row.textContent = `${count}🔥`
                 }
             }
-
-        })
-
-
+        }
     </script>
 </body>
 </html>
