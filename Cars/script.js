@@ -3,6 +3,7 @@ const container = document.querySelector(".container");
 const properties = document.querySelector("#carProperties");
 const checkCar = document.getElementById("checkCar");
 const modifyForm = document.getElementById("modifyForm");
+const searchBar = document.querySelector("#search-container input");
 let carlist = [];
 
 getCars();
@@ -134,6 +135,7 @@ function modifyCar(id){
                 throw new Error("Hiba a módosításnál!");
             }
             else{
+                alert("✅ Sikeres módosítás!");
                 back();
                 getCars();
             }
@@ -158,4 +160,18 @@ function deleteCar(id){
     })
     .catch(error => console.error(error.message));
     }
+}
+
+function search(){
+    getCars();
+    
+    if (carlist.find(c => c.id == searchBar.value)){
+        cardClick(searchBar.value);
+    }
+    else{
+        alert("Nincs ilyen autó a listában!");
+    }
+
+    searchBar.value = "";
+    
 }

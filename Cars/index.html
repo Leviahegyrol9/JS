@@ -9,23 +9,30 @@
 </head>
 <body>
     <div class="container">
+        <div id="search-container">
+            <input type="number" placeholder="Írja be az id-t...">
+            <button class="btn btn-dark" onclick="search()">Keresés</button>
+        </div>
+        <br>
+
         <div class="row"></div>
 
+        <h3>Autó hozzáadása</h3>
         <form id="carForm" class="mb-4">
-        <div class="mb-3">
-            <input type="text" id="brand" class="form-control" placeholder="Márka">
-        </div>
+            <div class="mb-3">
+                <input type="text" id="brand" class="form-control" placeholder="Márka">
+            </div>
 
-        <div class="mb-3">
-            <input type="text" id="model" class="form-control" placeholder="Model">
-        </div>
+            <div class="mb-3">
+                <input type="text" id="model" class="form-control" placeholder="Model">
+            </div>
 
-        <div class="mb-3">
-            <input type="number" id="year" class="form-control" placeholder="Évjárat">
-        </div>
+            <div class="mb-3">
+                <input type="number" id="year" class="form-control" placeholder="Évjárat">
+            </div>
 
-        <button onclick="createCar()" class="btn btn-success" type="button">Mentés</button>
-    </form>
+            <button onclick="createCar()" class="btn btn-success" type="button">Mentés</button>
+        </form>
     </div>
 
     <div id="checkCar">
@@ -33,18 +40,18 @@
         <button id="topBtn" class="btn btn-dark" onclick="back()">Vissza</button>
 
         <form id="modifyForm" class="mb-3">
-        <div class="mb-3">
-            <input type="text" id="newBrand" class="form-control" placeholder="Márka">
-        </div>
+            <div class="mb-3">
+                <input type="text" id="newBrand" class="form-control" placeholder="Márka">
+            </div>
 
-        <div class="mb-3">
-            <input type="text" id="newModel" class="form-control" placeholder="Model">
-        </div>
+            <div class="mb-3">
+                <input type="text" id="newModel" class="form-control" placeholder="Model">
+            </div>
 
-        <div class="mb-3">
-            <input type="number" id="newYear" class="form-control" placeholder="Évjárat">
-        </div>
-    </form>
+            <div class="mb-3">
+                <input type="number" id="newYear" class="form-control" placeholder="Évjárat">
+            </div>
+        </form>
     </div>
    
     <script src="script.js"></script>
