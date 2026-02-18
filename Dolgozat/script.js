@@ -10,6 +10,7 @@ function deleteCar(id) {
         return response.json();
     })
     .then(data => console.log(data))
+    .catch(error => console.log(error))
 }
 
 function getBooks() {
@@ -22,9 +23,11 @@ function getBooks() {
         return response.json();
     })
     .then(data => console.log(data))
+    .catch(error => console.log(error))
 }
 
 async function getPhoneById(id) {
+    try{
     const response = await fetch(`https://surveys-5jvt.onrender.com/api/phones/${id}`);
 
     if(!response.ok){
@@ -32,6 +35,10 @@ async function getPhoneById(id) {
         }
 
     return response.json();
+    }
+    catch (error){
+        console.log(error);
+    }  
 }
 
 function saveUser(firstName, lastName, email, password) {
@@ -55,4 +62,5 @@ function saveUser(firstName, lastName, email, password) {
         return response.json();
     })
     .then(data => console.log(data))
+    .catch(error => console.log(error))
 }
