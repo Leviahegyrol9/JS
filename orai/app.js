@@ -1,49 +1,70 @@
 import express from 'express'
 
-const PORT=3000;
-const app = express();
+const PORT = 3000
+const app = express()
 
 app.use(express.json())
-const users = [
-    {id: 1, name: 'Alan'},
-    {id: 2, name: 'Bob'},
-    {id: 3, name: 'Cloe'}
+
+const awards = [
+    {id: 1, movie: 'Lord of the Rings', director: 'Peter Jackson'},
+    {id: 2, movie: 'Titanic', director: 'James Camerot'},
+    {id: 3, movie: 'God Father', director: 'F. F. Coppola'}
 ]
 
-app.get('/users', (req,res) => {
-
-    res.json(users)
+app.get('/awards', (req, res) =>{
+    res.status(200).json(awards)
 })
 
-app.get('/users/:id', (req,res) => {
+app.get('/awards/:id', (req,res) =>{
     const id = +req.params.id
-    const user = users.find(x => x.id == id)
-    if(!user)
+    const award = awards.find((film) => film.id === id);
+    if(!award)
     {
-       return res.status(404).json({message: 'User not found!'})
+        return res.status(404).json({message: "Award not found!"})
+
     }
-    res.status(200).json(user)
+    res.status(200).json(award)
 })
 
-app.post('/users', (req,res) => {
-    // const name = req.body.name
-    const {name, age} = req.body
-    const nextId = users[-1]?.id + 1;
-    const user = {id: nextId, name}
-    users.push(user)
-    res.status(200).json(user)
+app.post('/awards', (req,res) =>{
+    const {movie,director} = req.body
+    if (!movie || !director){
+         return res.status(404).json({message: "Movie title and director are required!"})
+    }
+    const id = awards[awards.length - 1]?.id + 1 
+    const award = {id, movie, director}
+    awards.push(award);
+    res.status(200).json(award);
 })
 
-app.delete('/users', (req,res) => {
-    const id = +req.params.id;
-    const user = users.find(x => x.id == id)
-    if(!user)
+app.put('/awards/:id', (req,res) =>{
+    const id = +req.params.id
+    const award = awards.find((film) => film.id === id);
+      if(!award)
     {
-       return res.status(404).json({message: 'User not found!'})
+        return res.status(404).json({message: "Award not found!"})
     }
-    res.status(200).json(user)
+     const{movie,director} = req.body
+    if (!movie || !director){
+         return res.status(404).json({message: "Movie title and director are required!"})
+    }
+    award.movie = movie;
+    award.director = director;
+    res.status(201).json(award)
 })
 
-app.listen(PORT, () => {
-    console.log(`Server runs on port ${PORT}`)
+app.delete('/awards/:id', (req,res) =>{
+    const id = +req.params.id
+    const award = awards.find(x => x.id === id)
+    if(!award)
+    {
+        return res.status(404).json({message: "Award not found!"})
+    }
+    const index = awards.indexOf(award);
+    awards.splice(index,1)
+    res.status(201).json({message: 'Delete success'})
+})
+
+app.listen(PORT, () =>{
+    console.log(`Server runs on http://localhost:${PORT}`);
 })
