@@ -6,9 +6,9 @@ const app = express()
 app.use(express.json())
 
 const awards = [
-    {id: 1, movie: 'Lord of the Rings', director: 'Peter Jackson'},
-    {id: 2, movie: 'Titanic', director: 'James Camerot'},
-    {id: 3, movie: 'God Father', director: 'F. F. Coppola'}
+    {id: 1, title: 'Lord of the Rings', category: 'Best director'},
+    {id: 2, title: 'Titanic', category: 'Best film'},
+    {id: 3, title: 'List of Schindler', category: 'Best film'}
 ]
 
 app.get('/awards', (req, res) =>{
@@ -27,29 +27,29 @@ app.get('/awards/:id', (req,res) =>{
 })
 
 app.post('/awards', (req,res) =>{
-    const {movie,director} = req.body
-    if (!movie || !director){
-         return res.status(404).json({message: "Movie title and director are required!"})
+    const {title, category} = req.body
+    if (!title || !category){
+         return res.status(404).json({message: "Movie title and category are required!"})
     }
     const id = awards[awards.length - 1]?.id + 1 
-    const award = {id, movie, director}
+    const award = {id, title, category}
     awards.push(award);
     res.status(200).json(award);
 })
 
 app.put('/awards/:id', (req,res) =>{
     const id = +req.params.id
-    const award = awards.find((film) => film.id === id);
+    const award = awards.find(film => film.id === id);
       if(!award)
     {
         return res.status(404).json({message: "Award not found!"})
     }
-     const{movie,director} = req.body
-    if (!movie || !director){
-         return res.status(404).json({message: "Movie title and director are required!"})
+     const{title, category} = req.body
+    if (!title || !category){
+         return res.status(404).json({message: "Movie title and category are required!"})
     }
-    award.movie = movie;
-    award.director = director;
+    award.title = title;
+    award.category = category;
     res.status(201).json(award)
 })
 
@@ -66,5 +66,5 @@ app.delete('/awards/:id', (req,res) =>{
 })
 
 app.listen(PORT, () =>{
-    console.log(`Server runs on http://localhost:${PORT}`);
+    console.log(`Server runs on http://localhost:${PORT}/awards`);
 })
