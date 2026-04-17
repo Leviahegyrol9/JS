@@ -11,7 +11,15 @@ app.get("/books", (req, res) => {
     res.json(books);
 });
 
-app.get("/books/:id");
+app.get("/books/:id", (req, res) =>{
+    const book = db.getBookById(+req.params.id)
+
+    if (!book){
+        return res.status(404).json({message: "Nincs ilyen könyv"})
+    }
+    
+    res.status(200).json(book);
+});
 
 app.listen(PORT, () =>{
     console.log("Fut");

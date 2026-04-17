@@ -14,5 +14,11 @@ db.prepare(`
 export function getAllBooks(){
     return db.prepare(`SELECT * FROM books`).all();
 }
+export function getBookById(id){
+    return db.prepare(`SELECT * FROM books WHERE id = ?`).get(id);
+}
+export function CreateBook(){
+    return db.prepare(`SELECT * FROM books`).all();
+}
 
 export default db;
