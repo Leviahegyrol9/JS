@@ -42,9 +42,7 @@ app.put("/comments/:id", (req, res) => {
   comment.author = author;
   comment.message = message;
   db.updateComment(comment.id, comment.author, comment.message);
-  return res
-    .status(200)
-    .json({ message: "Comment updated successfully", comment });
+  res.status(200).json({ message: "Comment updated successfully", comment });
 });
 
 app.delete("/comments/:id", (req, res) => {
@@ -54,7 +52,7 @@ app.delete("/comments/:id", (req, res) => {
     return res.status(404).json({ message: "Comment not found" });
   }
   db.deleteComment(id);
-  return res.status(204).json({ message: "Comment deleted successfully" });
+  res.status(204).json({ message: "Comment deleted successfully" });
 });
 
 app.listen(PORT, () => console.log(`Server runs on port ${PORT}`));
