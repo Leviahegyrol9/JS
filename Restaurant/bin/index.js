@@ -24,13 +24,42 @@ function getMenu(){
 
         div.innerHTML = html;
 })
-.catch(error => console.error(error.message));
+.catch(error => alert(error.error));
 }
 
 function cardClick(id){
     if (foodList.find(e => e.id == id)) window.open(`food.html?id=${id}`, "_self");
     else alert("Nincs ilyen étel!");
 
+}
+
+function addFood(){
+    const name = document.querySelector("#name").value;
+    const price = document.querySelector("#price").value;
+    const weight = document.querySelector("#weight").value;
+
+    if (name && price && weight){
+
+        fetch("http://localhost:3000/foods", {
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json"
+            },
+            body: JSON.stringify({
+                name: name,
+                price: price,
+                weight: weight
+            })
+        })
+        .then(res => res.json())
+        .then(data => {
+            alert(data.message);
+            getMenu();
+        })
+        .catch(error => alert(error.error));
+
+    }
+    else alert("Minden mező kitöltése kötelező!");
 }
 
 function search(){

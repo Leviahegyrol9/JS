@@ -16,7 +16,26 @@
             <button class="btn btn-dark" onclick="search()">Keresés</button>
         </div>
         <br>
-        <div class="row"></div>    
+        <div class="row"></div>
+        <button id="back" class="btn btn-dark" onclick="location.href='#form'">Hozzáadás</button>
+
+        <form id="form" class="mb-3">
+            <h4>Hozzáadás</h4>
+
+            <div class="mb-3">
+                <input type="text" id="name" class="form-control" placeholder="Név">
+            </div>
+
+            <div class="mb-3">
+                <input type="number" id="price" class="form-control" placeholder="Ár">
+            </div>
+
+            <div class="mb-3">
+                <input type="number" id="weight" class="form-control" placeholder="Tömeg">
+            </div>
+			
+			<button onclick="addFood()" class="btn btn-success" type="button">Hozzáadás</button>
+        </form>
     </div>
 
     <script src="bin/index.js"></script>

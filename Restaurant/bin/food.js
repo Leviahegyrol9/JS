@@ -8,8 +8,8 @@ loadFood();
 
 async function loadFood() {
     try{
-        const res = await fetch(`http://localhost:3000/foods/${id}`);
-        const food = await res.json();
+        const response = await fetch(`http://localhost:3000/foods/${id}`);
+        const food = await response.json();
 
         title.textContent = food.name;
         h1.textContent = food.name;
@@ -21,7 +21,7 @@ async function loadFood() {
         `;
     }
     catch(error){
-        console.error(error.message);
+        alert(error.message);
     }
 }
 
@@ -29,7 +29,7 @@ function back(){
     window.open("index.html", "_self");
 }
 
-function saveFood(){
+function modifyFood(){
     const name = document.querySelector("#name").value;
     const price = document.querySelector("#price").value;
     const weight = document.querySelector("#weight").value;
@@ -47,23 +47,23 @@ function saveFood(){
         })
         })
         .then(res => res.json())
-        .then(data => console.log(data))
-        .catch(error => console.error(error));
-
-        back();
+        .then(data => {
+            alert(data.message);
+            back();
+        })
+        .catch(error => alert(error.error));        
     }
-    else{
-        alert("Minden mező kitöltése kötelező!");
-    }
+    else alert("Minden mező kitöltése kötelező!");
 }
 
 function deleteFood(){
-    fetch(`http://localhost:3000/foods/${id}`, {
-        method: "DELETE"
-    })
-    .then(res => res.json())
-    .then(data => console.log(data))
-    .catch(error => console.error(error));
-
-    back();
+    if (confirm("Biztosan szeretnéd törölni ezt az ételt?")){
+        fetch(`http://localhost:3000/foods/${id}`, {method: "DELETE"})
+        .then(res => res.json())
+        .then(data => {
+            alert(data.message);
+            back();
+        })
+        .catch(error => alert(error.error));
+        }  
 }
