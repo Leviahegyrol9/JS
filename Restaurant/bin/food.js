@@ -1,6 +1,11 @@
 const div = document.querySelector("div");
 const title = document.querySelector("title");
 const h1 = document.querySelector("h1");
+
+const nameInput = document.querySelector("#name");
+const priceInput = document.querySelector("#price");
+const weightInput = document.querySelector("#weight");
+
 const params = new URLSearchParams(window.location.search);
 const id = params.get("id");
 
@@ -19,6 +24,10 @@ async function loadFood() {
         Ár: ${food.price} Ft<br>
         Tömeg: ${food.weight} gramm
         `;
+
+        nameInput.value = food.name;
+        priceInput.value = food.price;
+        weightInput.value = food.weight;
     }
     catch(error){
         alert(error.message);
@@ -30,20 +39,16 @@ function back(){
 }
 
 function modifyFood(){
-    const name = document.querySelector("#name").value;
-    const price = document.querySelector("#price").value;
-    const weight = document.querySelector("#weight").value;
-
-    if (name && price && weight){
+    if (nameInput.value && priceInput.value && weightInput.value){
         fetch(`http://localhost:3000/foods/${id}`, {
         method: "PUT",
         headers: {
             "Content-Type": "application/json"
         },
         body: JSON.stringify({
-            name: name,
-            price: price,
-            weight: weight
+            name: nameInput.value,
+            price: priceInput.value,
+            weight: weightInput.value
         })
         })
         .then(res => res.json())
