@@ -16,7 +16,7 @@ app.get("/api/tools/:id", (req, res) => {
 });
 
 app.get("/api/tools/brand/:brand", (req, res) => {
-  const tool = db.getToolsByBrand(+req.params.id);
+  const tool = db.getToolsByBrand(req.params.id);
 
   if (!tool)
     return res.status(404).json({ message: "Az íróeszköz nem található." });
@@ -25,7 +25,7 @@ app.get("/api/tools/brand/:brand", (req, res) => {
 });
 
 app.get("/api/tools/type/:type", (req, res) => {
-  const tool = db.getToolsByType(+req.params.id);
+  const tool = db.getToolsByType(req.params.id);
 
   if (!tool)
     return res.status(404).json({ message: "Az íróeszköz nem található." });
@@ -34,7 +34,7 @@ app.get("/api/tools/type/:type", (req, res) => {
 });
 
 app.get("/api/tools/color/:color", (req, res) => {
-  const tool = db.getToolsByColor(+req.params.id);
+  const tool = db.getToolsByColor(req.params.id);
 
   if (!tool)
     return res.status(404).json({ message: "Az íróeszköz nem található." });
@@ -50,7 +50,7 @@ app.post("/api/tools", (req, res)=>{
 
 app.put("/api/tools/:id", (req, res)=>{
     const {brand, type, color, price, stock, refillable} = req.body;
-    db.uodateTool(req.params.id, brand, type, color, price, stock, refillable);
+    db.updateTool(req.params.id, brand, type, color, price, stock, refillable);
     return res.status(200).json("Az iróeszköz sikeresen frissítve");
 });
 
