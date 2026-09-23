@@ -2,35 +2,26 @@ import { useState } from "react";
 import "./App.css";
 
 function App() {
-  const [num1, setNum1] = useState("");
-  const [num2, setNum2] = useState("");
-
-  const handle1 = (event) => {
-    setNum1(event.target.value);
-  };
-  const handle2 = (event) => {
-    setNum2(event.target.value);
-  };
-  const handle3 = (event) => {
-    setNum2(event.target.value);
-  };
+  const [num1, setNum1] = useState<number>(0);
+  const [num2, setNum2] = useState<number>(0);
+  const [operation, setOperation] = useState<string>("");
 
   return (
     <>
       <h1>Egyszerű számológép</h1>
-      <input type="number" name="num1" onChange={handle1}></input>
-      <select onChange={handle3}>
+      <input type="number" onChange={(e) => setNum1(Number(e.target.value))}></input>
+      <select onChange={(e) => setOperation(e.target.value)}>
         <option value="+">+</option>
         <option value="-">-</option>
         <option value="*">*</option>
         <option value="/">/</option>
       </select>
-      <input type="number" name="num2" onChange={handle2}></input>
+      <input type="number" onChange={(e) => setSzam2(Number(e.target.value))}></input>
 
       <button>Számolás</button>
 
       <span>
-        {num1} {num2} =
+        {num1} {operation} {num2} =
       </span>
     </>
   );
