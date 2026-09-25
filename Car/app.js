@@ -51,7 +51,7 @@ app.put("/api/cars/:id", (req, res) => {
   }
 });
 
-app.delete("/comments/:id", (req, res) => {
+app.delete("/api/cars/:id", (req, res) => {
   try {
     db.deleteCar(req.params.id);
     res.status(204).json({ message: "Car deleted successfully" });

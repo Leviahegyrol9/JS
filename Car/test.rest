@@ -1,0 +1,33 @@
+GET http://localhost:3000/api/cars/brand/Ferrari HTTP/1.1
+
+###
+GET http://localhost:3000/api/cars/brand/ToyotaF HTTP/1.1
+
+###
+
+GET http://localhost:3000/api/cars/year/2020 HTTP/1.1
+
+###
+GET http://localhost:3000/api/cars/year/2028 HTTP/1.1
+
+###
+
+POST http://localhost:3000/api/cars HTTP/1.1
+content-type: application/json
+
+{
+    "model": "Spider",
+    "brand": "Ferrari",
+    "year": 2024
+}
+###
+PUT http://localhost:3000/api/cars/71 HTTP/1.1
+content-type: application/json
+
+{
+    "model": "Skyline",
+    "brand": "Nissan",
+    "year": 2024
+}
+###
+DELETE http://localhost:3000/api/cars/73 HTTP/1.1
