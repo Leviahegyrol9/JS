@@ -1,0 +1,9 @@
+.card .card-img {
+  height: 220px;
+  object-fit: cover;
+}
+body {
+  margin: 0;
+  padding: 0;
+  background-color: rgb(25, 25, 25);
+}
