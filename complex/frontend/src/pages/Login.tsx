@@ -1,8 +1,8 @@
 import { useRef, useState } from "react";
-import type { FormEvent } from "react";
 import { Alert, Button, Card, Container, Form } from "react-bootstrap";
 import { Link, useNavigate } from "react-router-dom";
 import apiClient from "../api/apiClient";
+import { toast } from "react-toastify";
 
 const Login = () => {
   const email = useRef<HTMLInputElement>(null);
@@ -10,10 +10,11 @@ const Login = () => {
   const [error, setError] = useState<string>("");
   const navigate = useNavigate();
 
-  const handleSubmit = (e: FormEvent) => {
-    e.preventDefault();
-    setError("");
-
+  const clickBtn = () => {
+    if (!email.current?.value || !password.current?.value) {
+      toast.error("Minden mezőt ki kell tölteni.");
+      return;
+    }
     apiClient
       .post("/login", {
         email: email.current?.value,
@@ -21,7 +22,8 @@ const Login = () => {
       })
       .then((res) => {
         localStorage.setItem("user", JSON.stringify(res.data.user));
-        navigate("/");
+        toast.success("Sikeres bejelentkezés!");
+        navigate(`/logged/${res.data.user.id}`);
       })
       .catch((err) =>
         setError(
@@ -40,34 +42,32 @@ const Login = () => {
 
           {error && <Alert variant="danger">{error}</Alert>}
 
-          <Form onSubmit={handleSubmit}>
-            <Form.Group className="mb-3" controlId="email">
+          <Form>
+            <Form.Group className="mb-3">
               <Form.Label>E-mail cím</Form.Label>
-              <Form.Control
-                type="email"
-                ref={email}
-                autoComplete="email"
-                required
-              />
+              <Form.Control type="email" ref={email} />
             </Form.Group>
 
-            <Form.Group className="mb-4" controlId="password">
+            <Form.Group className="mb-4">
               <Form.Label>Jelszó</Form.Label>
-              <Form.Control
-                type="password"
-                ref={password}
-                autoComplete="current-password"
-                required
-              />
+              <Form.Control type="password" ref={password} />
             </Form.Group>
-            <Button type="submit" variant="warning" className="w-100">
+            <Button
+              onClick={clickBtn}
+              variant="warning"
+              className="w-100 fw-bold"
+            >
               Bejelentkezés
             </Button>
           </Form>
 
           <div className="text-center mt-3">
+            <Link to="/registration" className="text-white">
+              Nincs fiókod?
+            </Link>
+            <br />
             <Link to="/" className="text-warning">
-              Vissza a motorokhoz
+              Vissza a főoldalra
             </Link>
           </div>
         </Card.Body>

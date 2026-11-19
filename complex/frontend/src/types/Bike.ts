@@ -1,11 +1,12 @@
 export type Bike = {
+  userId: number;
   id?: number;
   brand: string;
   model: string;
   year: number;
   displacement: number;
   power: number;
-  color: string;
+  owner: string;
   category: string;
   topSpeed: number;
   price: number;

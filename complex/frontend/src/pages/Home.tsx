@@ -1,18 +1,37 @@
 import { useEffect, useState } from "react";
 import type { Bike } from "../types/Bike";
 import apiClient from "../api/apiClient";
-import "../style/Home.css";
-import { Badge, Card, Col, Container, ListGroup, Row } from "react-bootstrap";
-import { Link } from "react-router-dom";
+import {
+  Alert,
+  Badge,
+  Button,
+  Card,
+  Col,
+  Container,
+  ListGroup,
+  Row,
+} from "react-bootstrap";
+import { useNavigate } from "react-router-dom";
+import { toast } from "react-toastify";
 
 const Home = () => {
   const [bikes, setBikes] = useState<Array<Bike>>([]);
+  const [error, setError] = useState<string>("");
+  const navigate = useNavigate();
+  const user = JSON.parse(localStorage.getItem("user") ?? "null");
+
+  if (user) {
+    navigate(`/logged/${user.id}`);
+  }
 
   useEffect(() => {
     apiClient
       .get("/bikes")
       .then((res) => setBikes(res.data))
-      .catch((err) => console.error(err));
+      .catch((err) => {
+        console.error(err);
+        setError("Nem sikerült betölteni a motorokat.");
+      });
   }, []);
 
   const generateCard = (bike: Bike) => {
@@ -27,9 +46,7 @@ const Home = () => {
               </Card.Title>
               <Badge bg="warning text-dark">{bike.category}</Badge>
             </div>
-            <Card.Subtitle className="mb-3">
-              {bike.year} · {bike.color}
-            </Card.Subtitle>
+            <Card.Subtitle className="mb-3">{bike.year}</Card.Subtitle>
             <Card.Text>{bike.description}</Card.Text>
           </Card.Body>
           <ListGroup>
@@ -72,13 +89,18 @@ const Home = () => {
             <b className="text-warning">{bikes.length}</b> motor a garázsban
           </p>
         </div>
-        <Link to="/login" className="fw-bold btn btn-warning">
+        <Button
+          onClick={() => navigate("/login")}
+          variant="outline-light"
+          className="fw-bold"
+        >
           Bejelentkezés
-        </Link>
+        </Button>
       </div>
       <Row xs={1} md={2} lg={3} className="g-4">
         {bikes.map(generateCard)}
       </Row>
+      {error && <Alert variant="danger">{error}</Alert>}
     </Container>
   );
 };
